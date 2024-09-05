@@ -1,3 +1,5 @@
+package lab1;
+
 class OddThread implements Runnable {
     public void run() {
      for(int i=0;i<100;i=i+1){

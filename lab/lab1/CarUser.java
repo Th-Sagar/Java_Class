@@ -1,3 +1,5 @@
+package lab1;
+
 class Car {
 
 	int model;
