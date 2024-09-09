@@ -7,6 +7,13 @@ public class Frame extends JFrame {
 
     public Frame(){
         setTitle("My title");
+
+//        setLayout(new FlowLayout(FlowLayout.LEFT,20,20));
+
+//        setLayout(new BoxLayout(getContentPane(),BoxLayout.X_AXIS));
+
+
+//        setLayout(new GridLayout(4,3));
         setLayout(new FlowLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         JLabel l = new JLabel("Enter Your Name: ");
