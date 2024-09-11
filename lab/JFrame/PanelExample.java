@@ -8,39 +8,52 @@ public class PanelExample extends JFrame {
 
 
         setTitle("Calculator");
-        setLayout(new GridBagLayout());  // Set GridBagLayout
-        GridBagConstraints gbc = new GridBagConstraints(); // To specify grid positioning
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy=0;
+        gbc.fill= GridBagConstraints.HORIZONTAL;
+        gbc.weightx=2;
+        gbc.insets =new Insets(10,10,10,10);
+        add(new JTextField(20),gbc);
 
-        // Creating panels
-        JPanel p1 = new JPanel();
-        JPanel p2 = new JPanel();
-        JPanel p3 = new JPanel();
+        JPanel number = new JPanel();
+        number.setLayout(new GridLayout(3,4,5,5));
+        String[] numberString ={
+                "1","2","3","4","5","6","7","8","9",".","0","C"
+        };
 
-        // Adding components to panels
-        p1.add(new JTextField(20));
-        p2.add(new JButton("Button2"));
+        for (String no:numberString)
+            number.add(new JButton(no));
 
-        // Set constraints for p1 (first row, fill horizontal space)
-        gbc.gridx = 0;  // Column 0
-        gbc.gridy = 0;  // Row 0
-        gbc.gridwidth = 2;  // Span two columns
-        gbc.fill = GridBagConstraints.HORIZONTAL;  // Fill horizontally
-        gbc.insets = new Insets(10, 10, 10, 10);  // Set padding
-        add(p1, gbc);  // Add p1 to frame
+        gbc.gridx=0;
+        gbc.gridy=1;
+        gbc.fill= GridBagConstraints.BOTH;
+        gbc.gridwidth=1;
+        add(number,gbc);
 
-        // Set constraints for p2 (second row)
-        gbc.gridx = 0;  // Column 0
-        gbc.gridy = 1;  // Row 1
-        gbc.gridwidth = 1;  // Span one column
-        gbc.fill = GridBagConstraints.NONE;  // No filling
-        add(p2, gbc);  // Add p2 to frame
+        JPanel operation = new JPanel();
+        operation.setLayout(new GridLayout(5,1,5,5));
+        String[] operationString ={
+                "+","-","*","/","+"
+        };
 
-        // Set constraints for p3 (third row)
-        gbc.gridx = 1;  // Column 1
-        gbc.gridy = 1;  // Row 1
-        add(p3, gbc);  // Add p3 to frame
+        for(String op :operationString)
+            operation.add(new JButton(op));
 
-        // Frame settings
+        gbc.gridx=1;
+        gbc.gridy=1;
+        gbc.fill=GridBagConstraints.BOTH;
+
+        add(operation,gbc);
+
+
+
+
+
+
+
+
         setSize(500, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
