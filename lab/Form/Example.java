@@ -17,6 +17,7 @@ class GuiExample extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         add(new JLabel("Registration Form : "), gbc);
 
         gbc.gridx = 0;
@@ -106,16 +107,16 @@ class GuiExample extends JFrame {
         JComboBox<String> jcb4 = new JComboBox<>(occupation);
         add(jcb4, gbc);
 
-        gbc.gridx = 0;
+        gbc.gridx = 1;
         gbc.gridy = 7;
         gbc.gridwidth = 3;
-        add(new JCheckBox(), gbc);
+        add(new JCheckBox("I own or work with small business"), gbc);
 
-        gbc.gridx = 2;
-        gbc.gridy = 7;
-        add(new JLabel("I own or work with small business"), gbc);
+//        gbc.gridx = 2;
+//        gbc.gridy = 7;
+//        add(new JLabel(), gbc);
 
-        gbc.gridx = 2;
+        gbc.gridx = 1;
         gbc.gridy = 8;
         gbc.gridwidth = 3;
         add(new JButton("Submit"), gbc);
