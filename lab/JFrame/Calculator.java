@@ -3,8 +3,8 @@ package JFrame;
 import javax.swing.*;
 import java.awt.*;
 
-public class PanelExample extends JFrame {
-    PanelExample(){
+public class Calculator extends JFrame {
+    Calculator(){
 
 
         setTitle("Calculator");
@@ -59,6 +59,6 @@ public class PanelExample extends JFrame {
         setVisible(true);
     }
     public static void main(String[] args) {
-        new PanelExample();
+        new Calculator();
     }
 }
