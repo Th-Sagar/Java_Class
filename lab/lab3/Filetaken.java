@@ -3,7 +3,7 @@ package lab3;
 import java.io.*;
 import java.util.Scanner;
 
-class User{
+class User implements Serializable{
     String id;
     String name;
     String email;
@@ -23,9 +23,11 @@ class User{
 public class Filetaken {
     public static void main(String[] args) {
 
-        try(FileWriter fw = new FileWriter("user.txt",true)) {
-           for ( int j =0;j<5;j++){
-               System.out.println("Input " + (j+1)+ " User data");
+
+        try(FileOutputStream fw = new FileOutputStream("user.txt",true)) {
+            ObjectOutputStream oos = new ObjectOutputStream(fw);
+           for ( int j =1;j<=5;j++){
+               System.out.println("Input " + " User data");
                Scanner sc = new Scanner(System.in);
                System.out.println("Enter id");
 
@@ -40,9 +42,9 @@ public class Filetaken {
                String email = sc.nextLine();
 
                User user = new User(id,name,email);
+               oos.writeObject(user);
 
 
-               fw.write(user.returnUser()+"\n");
            }
 
 
@@ -52,19 +54,24 @@ public class Filetaken {
         }
 
 
-        try
-        {
-            FileReader fr = new FileReader("user.txt");
-           int i ;
-            System.out.println();
-            System.out.println("Reading File....");
-           while((i=fr.read()) !=-1){
-               System.out.print((char) i);
-           }
+        try(FileInputStream fis = new FileInputStream("user.txt")){
 
-        }catch (Exception e){
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            System.out.println("User are");
+            for(int j=1; j<=5;j++){
+                User user1 = (User) ois.readObject();
+                System.out.println("Id : "+ user1.id + " Name : "+ user1.name + " Email : "+ user1.email);
+            }
+
+
+
+        }
+        catch (Exception e){
             System.out.println(e);
         }
+
+
+
 
     }
 }
