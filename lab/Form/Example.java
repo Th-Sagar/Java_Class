@@ -127,7 +127,7 @@ class GuiExample extends JFrame {
     }
 }
 
-public class Example {
+public class  Example {
     public static void main(String[] args) {
         new GuiExample();
     }

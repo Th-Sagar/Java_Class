@@ -34,7 +34,6 @@ public class Frame extends JFrame {
         bG.add(rB2);
         bG.add(rB3);
 
-
         String[] country = {"Nepal", "India", "China"};
         JComboBox<String> cBox = new JComboBox<String>(country);
         JComboBox<String> cBox1 = new JComboBox<>();

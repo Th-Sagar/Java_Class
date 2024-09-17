@@ -11,9 +11,7 @@ package lab2.MyException;
 //}
 
 class InvalidMarkException extends RuntimeException {
-    public InvalidMarkException() {
-        super("Custom Runtime Exception Occurred");
-    }
+
 
     public InvalidMarkException(String message) {
         super(message);

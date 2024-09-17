@@ -7,18 +7,10 @@ class Car {
 	int price;
 	int milage;
 
-	// Car(int model, String color, int price, int milage) {
-	// this.model = model;
-	// this.color = color;
-	// this.price = price;
-	// this.milage = milage;
-	// }
+
 
 	Car() {
-		model = 222;
-		color = "black";
-		price = 2332;
-		milage = 3433;
+
 	}
 
 	void print() {
@@ -31,7 +23,6 @@ public class CarUser {
 
 	public static void main(String[] args) {
 
-		// Car obj = new Car(1, "red", 234, 233);
 		Car obj = new Car();
 		Car obj1 = new Car();
 

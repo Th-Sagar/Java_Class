@@ -10,7 +10,6 @@ public class FileCopy {
         try {
             FileInputStream fis = new FileInputStream("myfile.txt");
             FileOutputStream fos = new FileOutputStream("copiedfile.txt");
-            byte[] s;
             int i;
             while((i=fis.read())!=-1){
 
