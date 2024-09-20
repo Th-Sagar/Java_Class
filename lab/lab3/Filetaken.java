@@ -63,14 +63,10 @@ public class Filetaken {
                 System.out.println("Id : "+ user1.id + " Name : "+ user1.name + " Email : "+ user1.email);
             }
 
-
-
         }
         catch (Exception e){
             System.out.println(e);
         }
-
-
 
 
     }
