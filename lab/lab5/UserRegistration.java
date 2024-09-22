@@ -3,186 +3,143 @@ package lab5;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class UserRegistration extends JFrame {
-    UserRegistration(){
+public class UserRegistration extends JFrame implements ActionListener {
+    private JTextField nameField, mobileField;
+    private JTextArea addressField, outputArea;
+    private JRadioButton maleRadio, femaleRadio;
+    private JComboBox<String> countryBox;
+    private JCheckBox hobbyReading, hobbyTraveling, hobbyCoding;
+    private JButton submitButton;
+
+    public UserRegistration() {
+        setTitle("User Registration Form");
+        setSize(500, 600);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Padding around components
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        setTitle("User Registration");
-
-
-
-        gbc.insets = new Insets(10,10,10,10);
-        ButtonGroup bg = new ButtonGroup();
-        JLabel label = new JLabel();
-
-        gbc.gridy=0;
+        // Name Label and Field
         gbc.gridx = 0;
-        JLabel jLabel = new JLabel("Name : ");
-        add(jLabel,gbc);
+        gbc.gridy = 0;
+        add(new JLabel("Name:"), gbc);
+        gbc.gridx = 1;
+        nameField = new JTextField(15);
+        add(nameField, gbc);
 
-        gbc.gridy=0;
-        gbc.gridx = 2;
-        JTextField name = new JTextField(20);
-        add(name,gbc);
-
-
-        gbc.gridy=1;
+        // Address Label and TextArea
         gbc.gridx = 0;
-        JLabel jLabel1 = new JLabel("Address : ");
-        add(jLabel1,gbc);
+        gbc.gridy = 1;
+        add(new JLabel("Address:"), gbc);
+        gbc.gridx = 1;
+        addressField = new JTextArea(3, 15);
+        add(new JScrollPane(addressField), gbc);
 
-        gbc.gridy=1;
-        gbc.gridx = 2;
-        JTextField address = new JTextField(20);
-        add(address,gbc);
-
-
-        gbc.gridy=2;
+        // Gender Label and Radio Buttons
         gbc.gridx = 0;
-        JLabel jLabel2 = new JLabel("Gender : ");
-        add(jLabel2,gbc);
+        gbc.gridy = 2;
+        add(new JLabel("Gender:"), gbc);
+        gbc.gridx = 1;
+        JPanel genderPanel = new JPanel();
+        maleRadio = new JRadioButton("Male");
+        femaleRadio = new JRadioButton("Female");
+        ButtonGroup genderGroup = new ButtonGroup();
+        genderGroup.add(maleRadio);
+        genderGroup.add(femaleRadio);
+        genderPanel.add(maleRadio);
+        genderPanel.add(femaleRadio);
+        add(genderPanel, gbc);
 
-
-        gbc.gridy=2;
-        gbc.gridx = 2;
-
-
-        JRadioButton maleButton = new JRadioButton("Male");
-        bg.add(maleButton);
-        add(maleButton,gbc);
-
-
-
-        gbc.gridy=2;
-        gbc.gridx = 3;
-        JRadioButton femaleButton = new JRadioButton("Female");
-        bg.add(femaleButton);
-        add(femaleButton,gbc);
-
-
-
-
-        gbc.gridy=2;
-        gbc.gridx = 4;
-        JRadioButton otherButton = new JRadioButton("Other");
-        bg.add(otherButton);
-        add(otherButton,gbc);
-
-
-        gbc.gridy=3;
+        // Country Label and ComboBox
         gbc.gridx = 0;
-        JLabel country1 = new JLabel("Country : ");
-        add(country1,gbc);
+        gbc.gridy = 3;
+        add(new JLabel("Country:"), gbc);
+        gbc.gridx = 1;
+        String[] countries = {"Select Country", "Nepal", "India", "USA", "UK"};
+        countryBox = new JComboBox<>(countries);
+        add(countryBox, gbc);
 
-
-        gbc.gridy=3;
-        gbc.gridx=2;
-        String[] countryName = {
-                "Country",
-                "Nepal",
-                "India",
-                "China"
-        };
-        JComboBox<String> country = new JComboBox<>(countryName);
-        add(country,gbc);
-
-        gbc.gridy=4;
+        // Mobile Number Label and Field
         gbc.gridx = 0;
-        JLabel jLabel4 = new JLabel("Mobile Number : ");
-        add(jLabel4,gbc);
+        gbc.gridy = 4;
+        add(new JLabel("Mobile Number:"), gbc);
+        gbc.gridx = 1;
+        mobileField = new JTextField(15);
+        add(mobileField, gbc);
 
-        gbc.gridy=4;
-        gbc.gridx = 2;
-        JTextField mobile = new JTextField(20);
-        add(mobile,gbc);
-
-
-        gbc.gridy=5;
+        // Hobbies Label and Checkboxes
         gbc.gridx = 0;
-        JLabel jLabel5 = new JLabel("Hobbies : ");
-        add(jLabel5,gbc);
+        gbc.gridy = 5;
+        add(new JLabel("Hobbies:"), gbc);
+        gbc.gridx = 1;
+        JPanel hobbyPanel = new JPanel();
+        hobbyReading = new JCheckBox("Reading");
+        hobbyTraveling = new JCheckBox("Traveling");
+        hobbyCoding = new JCheckBox("Coding");
+        hobbyPanel.add(hobbyReading);
+        hobbyPanel.add(hobbyTraveling);
+        hobbyPanel.add(hobbyCoding);
+        add(hobbyPanel, gbc);
 
-        gbc.gridy=5;
-        gbc.gridx = 2;
-        JCheckBox music = new JCheckBox("Music");
-        add(music,gbc);
+        // Submit Button
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        gbc.gridwidth = 2;
+        submitButton = new JButton("Submit");
+        submitButton.addActionListener(this);
+        add(submitButton, gbc);
 
-        gbc.gridy=5;
-        gbc.gridx = 3;
-        JCheckBox reading = new JCheckBox("Reading");
-        add(reading,gbc);
+        // Output TextArea (hidden initially)
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        gbc.gridwidth = 2;
+        outputArea = new JTextArea(5, 20);
+        outputArea.setEditable(false);
+        outputArea.setVisible(false);
+        add(new JScrollPane(outputArea), gbc);
 
-
-        gbc.gridx=2;
-        gbc.gridy=6;
-        JButton submit = new JButton("Submit");
-        submit.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String nameInput = name.getText();
-                String addressInput = address.getText();
-                String mobileNumber = mobile.getText();
-                boolean maleButtonInput = maleButton.isSelected();
-                boolean femaleButtonInput = femaleButton.isSelected();
-                boolean otherButtonInput = otherButton.isSelected();
-
-
-
-                if(!maleButtonInput && !femaleButtonInput && !otherButtonInput){
-                    label.setText("Please select gender");
-
-                }
-
-                if(country.getSelectedIndex()==0){
-                    label.setText("PLease select any country");
-                }
-
-
-                if(!music.isSelected() && !reading.isSelected()){
-                    label.setText("Please select any hobbies");
-                }
-
-
-
-
-                if(nameInput.equals("") || addressInput.equals("")|| mobileNumber.equals("")){
-                    label.setText("Please enter all fields name");
-                }
-
-
-                label.setText("");
-                System.out.println(nameInput);
-                System.out.println(addressInput);
-                System.out.println(mobileNumber);
-
-            }
-        });
-        add(submit,gbc);
-
-
-
-
-
-
-
-
-
-
-
-
-
-        gbc.gridy=7;
-        gbc.gridx=2;
-
-
-        add(label,gbc);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(700,700);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == submitButton) {
+            String name = nameField.getText().trim();
+            String mobile = mobileField.getText().trim();
+
+            if (name.isEmpty() || mobile.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Name and Mobile Number are required fields!", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                StringBuilder output = new StringBuilder();
+                output.append("Name: ").append(name).append("\n");
+                output.append("Address: ").append(addressField.getText().trim()).append("\n");
+
+                if (maleRadio.isSelected()) {
+                    output.append("Gender: Male\n");
+                } else if (femaleRadio.isSelected()) {
+                    output.append("Gender: Female\n");
+                } else {
+                    output.append("Gender: Not Specified\n");
+                }
+
+                output.append("Country: ").append(countryBox.getSelectedItem().toString()).append("\n");
+                output.append("Mobile Number: ").append(mobile).append("\n");
+
+                output.append("Hobbies: ");
+                if (hobbyReading.isSelected()) output.append("Reading ");
+                if (hobbyTraveling.isSelected()) output.append("Traveling ");
+                if (hobbyCoding.isSelected()) output.append("Coding ");
+                output.append("\n");
+
+                outputArea.setText(output.toString());
+                outputArea.setVisible(true);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         new UserRegistration();
     }
